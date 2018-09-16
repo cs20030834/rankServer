@@ -1,0 +1,54 @@
+var express    = require('express');
+var http = require('http');
+var static = require('serve-static');
+var bodyParser = require('body-parser');
+var path = require('path');
+var mysql      = require('mysql');
+var dbconfig   = require('./config/database.js');
+var connection = mysql.createConnection(dbconfig);
+
+var app = express();
+app.set('port', process.env.PORT || 3000);
+
+// configuration ===============================================================
+app.use(bodyParser.urlencoded({ extended: false })) // parse application/x-www-form-urlencoded
+app.use(bodyParser.json())  // parse application/json
+
+
+app.use(static(path.join(__dirname, 'public')));
+
+
+app.get('/', function(req, res){
+  res.send('Root');
+});
+
+/*
+app.get('/persons', function(req, res){
+
+  connection.query('SELECT * from Persons', function(err, rows) {
+    if(err) throw err;
+
+    console.log('The solution is: ', rows);
+    res.send(rows);
+  });
+});
+*/
+
+app.post('/rank', function(req, res){
+
+  res.json(req.body.id);
+
+  /*
+  connection.query('Insert into rank_info set ?', function(err, rows) {
+    if(err) throw err;
+
+    console.log('The solution is: ', rows);
+    res.send(rows);
+  });
+  */
+});
+
+
+app.listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + app.get('port'));
+});
