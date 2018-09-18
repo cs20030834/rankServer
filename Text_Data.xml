@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Languages>
+	<English>
+		<string name="localizedString">Localization</string>
+	</English>
+	
+	<Korean>
+		<string name="localizedString">현지화</string>
+	</Korean>
+</Languages>
